@@ -2,7 +2,7 @@ package com.myceep.myceep.helper
 
 import com.myceep.myceep.model.Note
 
-interface NoteResponse {
+interface NoteResponse<T> {
 
-    fun sucess(notes: List<Note>)
+    fun sucess(response: T)
 }

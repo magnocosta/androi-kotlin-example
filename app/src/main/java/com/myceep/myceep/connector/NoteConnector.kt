@@ -1,6 +1,7 @@
 package com.myceep.myceep.connector
 
 import android.util.Log
+import com.myceep.myceep.connector.repository.NoteRepository
 import com.myceep.myceep.connector.repository.RepositoryProvider
 import com.myceep.myceep.helper.NoteResponse
 import com.myceep.myceep.model.Note
@@ -14,7 +15,7 @@ class NoteConnector {
 
     val noteRepository = RepositoryProvider().noteRepository()
 
-    fun list(noteResponse: NoteResponse) {
+    fun list(noteResponse: NoteResponse<List<Note>>) {
         val call = noteRepository.list()
         noteResponse.sucess(notes());
         /*call.enqueue(object: Callback<List<Note>> {
@@ -32,7 +33,20 @@ class NoteConnector {
 
     }
 
-    fun create(note: Note) {
+    fun create(note: Note, noteResponse: NoteResponse<Note>) {
+        val call = noteRepository.create(note)
+        noteResponse.sucess(Note(note.title, note.description))
+        /*call.enqueue(object: Callback<Note> {
+            override fun onResponse(call: Call<Note>?, response: Response<Note>?) {
+                response?.body()?.let {
+                    noteResponse.sucess(it)
+                }
+            }
+
+            override fun onFailure(call: Call<Note>?, error: Throwable?) {
+
+            }
+        })*/
 
     }
 
