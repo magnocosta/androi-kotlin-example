@@ -16,38 +16,13 @@ class NoteConnector {
     val noteRepository = RepositoryProvider().noteRepository()
 
     fun list(noteResponse: NoteResponse<List<Note>>) {
-        val call = noteRepository.list()
+        noteRepository.list()
         noteResponse.sucess(notes());
-        /*call.enqueue(object: Callback<List<Note>> {
-            override fun onResponse(call: Call<List<Note>>?, response: Response<List<Note>>?) {
-                response?.body()?.let {
-                    noteResponse.sucess(it)
-                }
-                Log.i(TAG, "Response receive with success")
-            }
-
-            override fun onFailure(call: Call<List<Note>>?, t: Throwable?) {
-                Log.e(TAG, "Failed on receive response", t)
-            }
-        })*/
-
     }
 
     fun create(note: Note, noteResponse: NoteResponse<Note>) {
-        val call = noteRepository.create(note)
+        noteRepository.create(note)
         noteResponse.sucess(Note(note.title, note.description))
-        /*call.enqueue(object: Callback<Note> {
-            override fun onResponse(call: Call<Note>?, response: Response<Note>?) {
-                response?.body()?.let {
-                    noteResponse.sucess(it)
-                }
-            }
-
-            override fun onFailure(call: Call<Note>?, error: Throwable?) {
-
-            }
-        })*/
-
     }
 
     private fun notes() : List<Note> {
